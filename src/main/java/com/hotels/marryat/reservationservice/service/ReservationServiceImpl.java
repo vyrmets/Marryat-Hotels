@@ -4,7 +4,7 @@ import com.hotels.marryat.reservationservice.entity.Reservation;
 import com.hotels.marryat.reservationservice.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -37,7 +37,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Reservation> getReservationsByDateRange(Date fromDate, Date toDate) {
+    public List<Reservation> getReservationsByDateRange(LocalDate fromDate, LocalDate toDate) {
         return (List<Reservation>) reservationRepository.findReservationsByDateRange(fromDate, toDate);
     }
 

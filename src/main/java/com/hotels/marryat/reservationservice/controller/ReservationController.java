@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -55,8 +55,8 @@ public class ReservationController {
     @GetMapping("/dates")
     @ResponseBody
     public List<ReservationDto> getReservationsByDateRange(
-            @RequestParam(value = "fromDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fromDate,
-            @RequestParam(value = "toDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date toDate) {
+            @RequestParam(value = "fromDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fromDate,
+            @RequestParam(value = "toDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate toDate) {
         return reservationMapper.reservationsToDtos(reservationService.getReservationsByDateRange(fromDate, toDate));
     }
 

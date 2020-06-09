@@ -1,7 +1,8 @@
 package com.hotels.marryat.reservationservice.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name="RESERVATION")
@@ -20,11 +21,11 @@ public class Reservation {
     @Column(name="ROOM_NUMBER")
     private short roomNumber;
 
-    @Column(name="START_DATE")
-    private Date startDate;
+    @Column(name = "START_DATE")
+    private LocalDate startDate;
 
-    @Column(name="END_DATE")
-    private Date endDate;
+    @Column(name = "END_DATE")
+    private LocalDate endDate;
 
     public Long getId() {
         return id;
@@ -58,19 +59,39 @@ public class Reservation {
         this.roomNumber = roomNumber;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Reservation that = (Reservation) o;
+        return roomNumber == that.roomNumber &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName) &&
+                Objects.equals(startDate, that.startDate) &&
+                Objects.equals(endDate, that.endDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, roomNumber, startDate, endDate);
     }
 }
