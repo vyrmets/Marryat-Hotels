@@ -1,14 +1,15 @@
 package com.hotels.marryat.reservationservice.service;
 
-import com.hotels.marryat.reservationservice.dto.DateRange;
 import com.hotels.marryat.reservationservice.entity.Reservation;
 import com.hotels.marryat.reservationservice.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
+
     private final ReservationRepository reservationRepository;
 
     public ReservationServiceImpl(ReservationRepository reservationRepository) {
@@ -26,13 +27,18 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public Reservation updateReservation(Reservation reservation) {
+        return reservationRepository.save(reservation);
+    }
+
+    @Override
     public void deleteReservation(Long reservationId) {
         reservationRepository.deleteById(reservationId);
     }
 
     @Override
-    public List<Reservation> getAllReservations(DateRange dateRange) {
-        return (List<Reservation>) reservationRepository.findReservationsByDateRange(dateRange.getStartDate(), dateRange.getEndDate());
+    public List<Reservation> getReservationsByDateRange(Date fromDate, Date toDate) {
+        return (List<Reservation>) reservationRepository.findReservationsByDateRange(fromDate, toDate);
     }
 
 }

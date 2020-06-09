@@ -5,11 +5,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Repository
 public interface ReservationRepository extends CrudRepository<Reservation, Long> {
 
-    @Query("SELECT r FROM Reservation r WHERE r.startDate = ?1 AND r.endDate = ?2")
-    Iterable<Reservation> findReservationsByDateRange(Date startDate, Date endDate);
+    @Query("SELECT r FROM Reservation r " +
+            "WHERE (r.startDate BETWEEN :lowerLimit AND :upperLimit) " +
+            "OR (r.endDate BETWEEN :lowerLimit AND :upperLimit)" +
+            "OR (r.startDate < :lowerLimit AND r.endDate > :upperLimit)")
+    Iterable<Reservation> findReservationsByDateRange(Date lowerLimit, Date upperLimit);
 }
