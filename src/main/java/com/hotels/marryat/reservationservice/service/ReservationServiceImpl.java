@@ -38,7 +38,6 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<Reservation> getReservationsByDateRange(LocalDate fromDate, LocalDate toDate) {
-        return (List<Reservation>) reservationRepository.findReservationsByDateRange(fromDate, toDate);
+        return reservationRepository.findReservationsByDateRange(fromDate, toDate);
     }
-
 }

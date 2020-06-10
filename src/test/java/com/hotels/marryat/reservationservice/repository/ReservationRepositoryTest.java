@@ -28,7 +28,7 @@ public class ReservationRepositoryTest {
         LocalDate upperLimit = LocalDate.of(2020, 6, 5);
 
         List<Reservation> reservations
-                = (List<Reservation>) reservationRepository.findReservationsByDateRange(lowerLimit, upperLimit);
+                = reservationRepository.findReservationsByDateRange(lowerLimit, upperLimit);
 
         assertThat(reservations, hasSize(1));
         assertThat(reservations.get(0).getFirstName(), is("Bill"));
@@ -40,7 +40,7 @@ public class ReservationRepositoryTest {
         LocalDate upperLimit = LocalDate.of(2020, 6, 10);
 
         List<Reservation> reservations
-                = (List<Reservation>) reservationRepository.findReservationsByDateRange(lowerLimit, upperLimit);
+                = reservationRepository.findReservationsByDateRange(lowerLimit, upperLimit);
 
         assertThat(reservations, hasSize(2));
         assertThat(reservations.get(0).getFirstName(), is("Bill"));

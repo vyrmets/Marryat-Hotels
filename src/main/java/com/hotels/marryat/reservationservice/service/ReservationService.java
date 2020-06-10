@@ -16,5 +16,4 @@ public interface ReservationService {
     void deleteReservation(Long reservationId);
 
     List<Reservation> getReservationsByDateRange(LocalDate fromDate, LocalDate toDate);
-
 }
